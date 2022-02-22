@@ -7,22 +7,17 @@ import styles from './Weather.module.css';
 
 function Weather() {
     const [weather, setWeather] = useState(new WeatherResponse());
-    const [weatherIconUrl, setWeatherIconUrl]= useState('null');
 
     useEffect(() => {
-        fetch('http://api.openweathermap.org/data/2.5/weather?zip=28461&appid=12a6b20d756c5b22ec58b419b759d177')
+        fetch('/api/weather')
         .then((res) => res.json())
         .then((data: WeatherResponse) => {
             setWeather(data);
         })
     }, []);
 
-    useEffect(() => {
-        if (weather.weather[0].icon !== '') {
-            setWeatherIconUrl(`http://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`);
-        }
-    }, [weather])
-
+    if (weather.weather[0].iconUrl === '')
+        return <p>loading weather...</p>;
     return (
         <Card className={styles.marged} variant="outlined">
             <CardContent>
@@ -35,7 +30,7 @@ function Weather() {
                 </Typography>
                 <Typography>
                     <img
-                        src={weatherIconUrl}
+                        src={weather.weather[0].iconUrl}
                         alt={weather.weather[0].icon}
                         width={100}
                         height={100}
