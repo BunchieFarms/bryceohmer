@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { WeatherResponse } from '../../interfaces/weather/weatherResponse';
 import { Typography } from "@mui/material";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -9,31 +7,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import Divider from '@mui/material/Divider';
 
 function Weather(props: any) {
-    // const [weather, setWeather] = useState(new WeatherResponse());
-    // const [forecast, setForecast] = useState(null);
-
-    // useEffect(() => {
-    //     fetch('/api/currentWeather')
-    //     .then((res) => res.json())
-    //     .then((data: WeatherResponse) => {
-    //         setWeather(data);
-    //     })
-    // }, []);
-
-    // useEffect(() => {
-    //     fetch('/api/weatherForecast')
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //         setForecast(data);
-    //         console.log(data)
-    //     });
-    // }, []);
-
-    var test = [1, 2, 3, 4, 5];
-
     if (props.currentWeather.weather[0].iconUrl === '')
         return <p>loading weather...</p>;
     return (
@@ -66,42 +41,38 @@ function Weather(props: any) {
             <List sx={{ display: 'inline-block' }}>
                 {props.weatherForecast.daily.slice(1, 4).map((weather: any) => {
                     return (
-                        <div>
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar>
-                                        <img
-                                            src={weather.weather[0].iconUrl}
-                                            alt={weather.weather[0].icon}
-                                            width={100}
-                                            height={100}
-                                        />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText primary={getDate(weather.dt)} secondary={`${convertKelvinToFahrenheit(weather.temp.max)} / ${convertKelvinToFahrenheit(weather.temp.min)}`} />
-                            </ListItem>
-                        </div>
+                        <ListItem key={weather.dt}>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <img
+                                        src={weather.weather[0].iconUrl}
+                                        alt={weather.weather[0].icon}
+                                        width={100}
+                                        height={100}
+                                    />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary={getDate(weather.dt)} secondary={`${convertKelvinToFahrenheit(weather.temp.max)} / ${convertKelvinToFahrenheit(weather.temp.min)}`} />
+                        </ListItem>
                     )
                 })}
             </List>
             <List sx={{ display: 'inline-block' }}>
                 {props.weatherForecast.daily.slice(4, 7).map((weather: any) => {
                     return (
-                        <div>
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar>
-                                        <img
-                                            src={weather.weather[0].iconUrl}
-                                            alt={weather.weather[0].icon}
-                                            width={100}
-                                            height={100}
-                                        />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText primary={getDate(weather.dt)} secondary={`${convertKelvinToFahrenheit(weather.temp.max)} / ${convertKelvinToFahrenheit(weather.temp.min)}`} />
-                            </ListItem>
-                        </div>
+                        <ListItem key={weather.dt}>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <img
+                                        src={weather.weather[0].iconUrl}
+                                        alt={weather.weather[0].icon}
+                                        width={100}
+                                        height={100}
+                                    />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary={getDate(weather.dt)} secondary={`${convertKelvinToFahrenheit(weather.temp.max)} / ${convertKelvinToFahrenheit(weather.temp.min)}`} />
+                        </ListItem>
                     )
                 })}
             </List>

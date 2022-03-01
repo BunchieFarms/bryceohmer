@@ -1,7 +1,7 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
 import Header from '../components/header/header';
 import Homebody from '../components/homebody/homebody';
+import Footer from '../components/footer/footer';
 
 export default function Home(props: any) {
   return (
@@ -13,11 +13,10 @@ export default function Home(props: any) {
       
       <Header></Header>
       <Homebody currentWeather={props.currentWeather} weatherForecast={props.weatherForecast}></Homebody>
+      <Footer></Footer>
     </div>
   )
 }
-
-// export default Home;
 
 export async function getStaticProps() {
   const currentWeatherRes = await fetch('http://localhost:3001/api/currentWeather');
