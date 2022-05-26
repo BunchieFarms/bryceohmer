@@ -13,7 +13,7 @@ export default function Home(props: any) {
       
       <Header></Header>
       <Homebody currentWeather={props.currentWeather} weatherForecast={props.weatherForecast}></Homebody>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </div>
   )
 }

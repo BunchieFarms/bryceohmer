@@ -1,45 +1,37 @@
 import * as React from 'react';
-import Popover from '@mui/material/Popover';
 import styles from './Face.module.css';
 
 export default function Face() {
-    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+    const [facePic, setFacePic] = React.useState<string>('bryce');
 
     const handleClick = (event: any) => {
-        setAnchorEl(event.currentTarget);
+        setFacePic(facePic === 'bryce' ? 'doot' : 'bryce');
+        const sound = document.getElementById('dooty') as HTMLMediaElement;
+        if (facePic === 'doot')
+            sound?.play();
     };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
+    let whichFace;
+    if (facePic === 'bryce') {
+        whichFace = <img
+                    onClick={handleClick}
+                    src={require('../../public/face80-2.jpg')}
+                    alt="my face"
+                    className={styles.logo}
+                />;
+    } else {
+        whichFace = <img
+                    onClick={handleClick}
+                    src={require('../../public/doot.png')}
+                    alt="doot"
+                    className={styles.logo}
+                />
+    }
 
     return (
         <div>
-            <img
-                onClick={handleClick}
-                src={require('../../public/face80-2.jpg')}
-                alt="my face"
-                className={styles.logo}
-            />
-            <Popover
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                    vertical: 'center',
-                    horizontal: 'right',
-                }}
-                transformOrigin={{
-                    vertical: 'center',
-                    horizontal: 'left',
-                }}
-            >
-                hello.
-            </Popover>
+            {whichFace}
+            <audio id='dooty' src='/skullsound2.mp3'></audio>
         </div>
     );
 }
