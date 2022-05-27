@@ -19,8 +19,7 @@ function Weather(props: any) {
                         I live in <b>Southport, NC</b>.
                     </Typography>
                     <Typography sx={{ fontSize: 16 }} gutterBottom>
-                        This is the weather as of<br />
-                        {getCurrentTime(props.currentWeather.dt || 0)}
+                        Here is the current and future weather, and past rainfall.
                     </Typography>
                     <Typography>
                         <img
@@ -30,14 +29,18 @@ function Weather(props: any) {
                             height={100}
                         />
                     </Typography>
-                    <Typography sx={{ fontSize: 16 }} gutterBottom>
+                    <Typography sx={{ fontSize: 14 }} gutterBottom>
                         ({props.currentWeather.weather[0].description})<br />
                         {convertKelvinToFahrenheit(props.currentWeather.main.temp)}<br />
-                        {convertKelvinToFahrenheit(props.weatherForecast.daily[0].temp.max) + ' / ' + convertKelvinToFahrenheit(props.weatherForecast.daily[0].temp.min)}
+                        {convertKelvinToFahrenheit(props.weatherForecast.daily[0].temp.max) + ' / ' + convertKelvinToFahrenheit(props.weatherForecast.daily[0].temp.min)}<br />
+                        {'Rain so far: ' + convertMMtoInch(props.pastWeather[0].cumRain) + ' in'}
                     </Typography>
                 </CardContent>
             </Card>
 
+            <Typography sx={{ fontSize: 16 }} gutterBottom>
+                Forecast
+            </Typography>
             <List sx={{ display: 'inline-block' }}>
                 {props.weatherForecast.daily.slice(1, 4).map((weather: any) => {
                     return (
@@ -52,7 +55,12 @@ function Weather(props: any) {
                                     />
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary={getDate(weather.dt)} secondary={`${convertKelvinToFahrenheit(weather.temp.max)} / ${convertKelvinToFahrenheit(weather.temp.min)}`} />
+                            <ListItemText primary={getDate(weather.dt)} secondary={
+                                <span>
+                                    <span>{convertKelvinToFahrenheit(weather.temp.max)} / {convertKelvinToFahrenheit(weather.temp.min)}</span><br />
+                                    <span>Rain: {convertMMtoInch(weather.rain)} in</span>
+                                </span>
+                            } />
                         </ListItem>
                     )
                 })}
@@ -71,7 +79,54 @@ function Weather(props: any) {
                                     />
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary={getDate(weather.dt)} secondary={`${convertKelvinToFahrenheit(weather.temp.max)} / ${convertKelvinToFahrenheit(weather.temp.min)}`} />
+                            <ListItemText primary={getDate(weather.dt)} secondary={
+                                <span>
+                                    <span>{convertKelvinToFahrenheit(weather.temp.max)} / {convertKelvinToFahrenheit(weather.temp.min)}</span><br />
+                                    <span>Rain: {convertMMtoInch(weather.rain)} in</span>
+                                </span>
+                            } />
+                        </ListItem>
+                    )
+                })}
+            </List>
+
+            <Typography sx={{ fontSize: 16 }} gutterBottom>
+                Past Rainfall
+            </Typography>
+            <List sx={{ display: 'inline-block' }}>
+                {props.pastWeather.slice(1, 4).map((weather: any) => {
+                    return (
+                        <ListItem key={weather.date}>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <img
+                                        src={weather.iconUrl}
+                                        alt={weather.iconUrl}
+                                        width={100}
+                                        height={100}
+                                    />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary={getDate(weather.date)} secondary={`Rain: ${convertMMtoInch(weather.cumRain)} in`} />
+                        </ListItem>
+                    )
+                })}
+            </List>
+            <List sx={{ display: 'inline-block' }}>
+                {props.pastWeather.slice(4, 7).map((weather: any) => {
+                    return (
+                        <ListItem key={weather.date}>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <img
+                                        src={weather.iconUrl}
+                                        alt={weather.iconUrl}
+                                        width={100}
+                                        height={100}
+                                    />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary={getDate(weather.date)} secondary={`Rain: ${convertMMtoInch(weather.cumRain)} in`} />
                         </ListItem>
                     )
                 })}
@@ -86,17 +141,22 @@ function getDate(dt: number) {
     return splitDate.join(' ');
 }
 
-function getCurrentTime(dt: number) {
-    const time = new Date(dt * 1000).toLocaleTimeString();
-    const meridiem = time.slice(-2);
-    const splitTime = time.split(':');
-    splitTime.pop();
-    return `${splitTime.join(':')} ${meridiem}`;
-}
-
 function convertKelvinToFahrenheit(temp: number) {
     const convTemp = (temp - 273.15) * (9 / 5) + 32;
     return `${convTemp.toString().split('.')[0]}\xB0F`;
+}
+
+function convertMMtoInch(mm: number) {
+    if (mm === undefined) {
+        return 0;
+    } else {
+        const conversion = (mm / 25.4).toFixed(2);
+        if (mm > 0 && parseFloat(conversion) < 0.5) {
+            return '< 0.5'
+        } else {
+            return conversion;
+        }
+    }
 }
 
 export default Weather;
