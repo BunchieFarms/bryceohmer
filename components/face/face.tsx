@@ -4,11 +4,13 @@ import styles from './Face.module.css';
 export default function Face() {
     const [facePic, setFacePic] = React.useState<string>('bryce');
 
-    const handleClick = (event: any) => {
-        setFacePic(facePic === 'bryce' ? 'doot' : 'bryce');
+    const handleClick = () => {
+        setFacePic('doot');
         const sound = document.getElementById('dooty') as HTMLMediaElement;
-        if (facePic === 'doot')
-            sound?.play();
+        sound?.play();
+        setTimeout(() => {
+            setFacePic('bryce');
+        }, 500)
     };
 
     let whichFace;
