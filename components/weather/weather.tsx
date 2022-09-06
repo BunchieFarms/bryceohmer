@@ -8,7 +8,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { useEffect, useState } from "react";
 
 function Weather(props: any) {
-    const [selectedLocation, setSelectedLocation] = useLocalStorage('location', null);
+    const [selectedLocation, setSelectedLocation] = useLocalStorage('location', 28337);
     const [currentWeather, setCurrentWeather] = useState(props.currentWeather[0]);
     const [forecast, setForecast] = useState(props.weatherForecast[0]);
     const [pastWeather, setPastWeather] = useState(props.pastWeather);
