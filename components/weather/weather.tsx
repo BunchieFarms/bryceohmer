@@ -41,7 +41,7 @@ function Weather(props: any) {
                                 onChange={e => setSelectedLocation(e.target.value)}
                             >
                                 {props.locations.map((location: any, index: number) => (
-                                    <MenuItem key={index} value={location.zip}>{location.city}</MenuItem>
+                                    <MenuItem key={index} value={location.zip}>{location.city} ({location.trails[0]})</MenuItem>
                                 ))}
                             </Select>
                             <Typography>
