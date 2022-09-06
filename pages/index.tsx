@@ -11,7 +11,7 @@ export default function Home(props: any) {
       </Head>
       
       <Header></Header>
-      <Homebody currentWeather={props.currentWeather} weatherForecast={props.weatherForecast} pastWeather={props.pastWeather}></Homebody>
+      <Homebody currentWeather={props.currentWeather} weatherForecast={props.weatherForecast} pastWeather={props.pastWeather} locations={props.locations}></Homebody>
     </div>
   )
 }
@@ -26,11 +26,15 @@ export async function getStaticProps() {
   const pastWeatherRes = await fetch('http://localhost:3001/api/pastWeather');
   const pastWeather = await pastWeatherRes.json();
 
+  const locationsRes = await fetch('http://localhost:3001/api/locations');
+  const locations = await locationsRes.json();
+
   return {
     props: {
       currentWeather,
       weatherForecast,
-      pastWeather
+      pastWeather,
+      locations
     }
   }
 }

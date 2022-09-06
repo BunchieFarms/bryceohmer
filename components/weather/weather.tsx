@@ -1,162 +1,77 @@
-import { Typography } from "@mui/material";
+import { Box, Grid, MenuItem, Select, Typography } from "@mui/material";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import styles from './Weather.module.css';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
+import WeatherGrid from "../weatherGrid/weatherGrid";
+import { convertKelvinToFahrenheit, convertMMtoInch } from "../../commonLogic/commonLogic";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import { useEffect, useState } from "react";
 
 function Weather(props: any) {
-    if (props.currentWeather.weather[0].iconUrl === '')
+    const [selectedLocation, setSelectedLocation] = useLocalStorage('location', null);
+    const [currentWeather, setCurrentWeather] = useState(props.currentWeather[0]);
+    const [forecast, setForecast] = useState(props.weatherForecast[0]);
+    const [pastWeather, setPastWeather] = useState(props.pastWeather);
+
+    if (!props.currentWeather[0])
         return <p>loading weather...</p>;
+    
+    useEffect(() => {
+        const filteredCurrentWeather = props.currentWeather.find((item: any) => item.zip === parseInt(selectedLocation))
+        const filteredForecast = props.weatherForecast.find((item: any) => item.zip === parseInt(selectedLocation))
+        const filteredPastWeather = props.pastWeather.filter((item: any) => item.zip === parseInt(selectedLocation))
+        setCurrentWeather(filteredCurrentWeather);
+        setForecast(filteredForecast);
+        setPastWeather(filteredPastWeather)
+    }, [selectedLocation])
+
     return (
-        <div>
-            <Card className={styles.marged} variant="outlined">
-                <CardContent>
-                    <Typography sx={{ fontSize: 20 }}>
-                        I live in <b>Southport, NC</b>.
-                    </Typography>
-                    <Typography sx={{ fontSize: 16 }} gutterBottom>
-                        Here is the current and future weather, and past rainfall.
-                    </Typography>
-                    <Typography>
-                        <img
-                            src={props.currentWeather.weather[0].iconUrl}
-                            alt={props.currentWeather.weather[0].icon}
-                            width={100}
-                            height={100}
-                        />
-                    </Typography>
-                    <Typography sx={{ fontSize: 14 }} gutterBottom>
-                        ({props.currentWeather.weather[0].description})<br />
-                        {convertKelvinToFahrenheit(props.currentWeather.main.temp)}<br />
-                        {convertKelvinToFahrenheit(props.weatherForecast.daily[0].temp.max) + ' / ' + convertKelvinToFahrenheit(props.weatherForecast.daily[0].temp.min)}<br />
-                        {'Rain so far: ' + convertMMtoInch(props.pastWeather[0].cumRain) + ' in'}
-                    </Typography>
-                </CardContent>
-            </Card>
+        <Box mt={2}>
+            <Grid container spacing={1}>
+                <Grid item xs={12}>
+                    <Card className={styles.marged} variant="outlined">
+                        <CardContent>
+                            <Typography sx={{ fontSize: 20 }} gutterBottom>
+                                This is the current, future, and past weather and rainfall for
+                            </Typography>
+                            <Select
+                                labelId="location-select-label"
+                                id="location-select-id"
+                                value={selectedLocation}
+                                onChange={e => setSelectedLocation(e.target.value)}
+                            >
+                                {props.locations.map((location: any) => (
+                                    <MenuItem value={location.zip}>{location.city}</MenuItem>
+                                ))}
+                            </Select>
+                            <Typography>
+                                <img
+                                    src={currentWeather.weather[0].iconUrl}
+                                    alt={currentWeather.weather[0].icon}
+                                    width={100}
+                                    height={100}
+                                />
+                            </Typography>
+                            <Typography sx={{ fontSize: 14 }} gutterBottom>
+                                ({currentWeather.weather[0].description})<br />
+                                {convertKelvinToFahrenheit(currentWeather.main.temp)}<br />
+                                {convertKelvinToFahrenheit(forecast.daily[0].temp.max) + ' / ' + convertKelvinToFahrenheit(forecast.daily[0].temp.min)}<br />
+                                {convertMMtoInch(pastWeather[0].cumRain) + ' (so far)'}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
 
-            <Typography sx={{ fontSize: 16 }} gutterBottom>
-                Forecast
-            </Typography>
-            <List sx={{ display: 'inline-block' }}>
-                {props.weatherForecast.daily.slice(1, 4).map((weather: any) => {
-                    return (
-                        <ListItem key={weather.dt}>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <img
-                                        src={weather.weather[0].iconUrl}
-                                        alt={weather.weather[0].icon}
-                                        width={100}
-                                        height={100}
-                                    />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={getDate(weather.dt)} secondary={
-                                <span>
-                                    <span>{convertKelvinToFahrenheit(weather.temp.max)} / {convertKelvinToFahrenheit(weather.temp.min)}</span><br />
-                                    <span>Rain: {convertMMtoInch(weather.rain)} in</span>
-                                </span>
-                            } />
-                        </ListItem>
-                    )
-                })}
-            </List>
-            <List sx={{ display: 'inline-block' }}>
-                {props.weatherForecast.daily.slice(4, 7).map((weather: any) => {
-                    return (
-                        <ListItem key={weather.dt}>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <img
-                                        src={weather.weather[0].iconUrl}
-                                        alt={weather.weather[0].icon}
-                                        width={100}
-                                        height={100}
-                                    />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={getDate(weather.dt)} secondary={
-                                <span>
-                                    <span>{convertKelvinToFahrenheit(weather.temp.max)} / {convertKelvinToFahrenheit(weather.temp.min)}</span><br />
-                                    <span>Rain: {convertMMtoInch(weather.rain)} in</span>
-                                </span>
-                            } />
-                        </ListItem>
-                    )
-                })}
-            </List>
+                <Grid item xl={6} xs={12} >
+                    <WeatherGrid header={'Forecast'} weatherItems={forecast.daily} />
+                </Grid>
 
-            <Typography sx={{ fontSize: 16 }} gutterBottom>
-                Past Rainfall
-            </Typography>
-            <List sx={{ display: 'inline-block' }}>
-                {props.pastWeather.slice(1, 4).map((weather: any) => {
-                    return (
-                        <ListItem key={weather.date}>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <img
-                                        src={weather.iconUrl}
-                                        alt={weather.iconUrl}
-                                        width={100}
-                                        height={100}
-                                    />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={getDate(weather.date)} secondary={`Rain: ${convertMMtoInch(weather.cumRain)} in`} />
-                        </ListItem>
-                    )
-                })}
-            </List>
-            <List sx={{ display: 'inline-block' }}>
-                {props.pastWeather.slice(4, 7).map((weather: any) => {
-                    return (
-                        <ListItem key={weather.date}>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <img
-                                        src={weather.iconUrl}
-                                        alt={weather.iconUrl}
-                                        width={100}
-                                        height={100}
-                                    />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={getDate(weather.date)} secondary={`Rain: ${convertMMtoInch(weather.cumRain)} in`} />
-                        </ListItem>
-                    )
-                })}
-            </List>
-        </div>
+                <Grid item xl={6} xs={12} >
+                    <WeatherGrid header={'Past Rainfall'} weatherItems={pastWeather} />
+                </Grid>
+            </Grid>
+        </Box>
     )
-}
-
-function getDate(dt: number) {
-    const splitDate = new Date(dt * 1000).toDateString().split(' ').slice(0, 3);
-    splitDate[2] = parseInt(splitDate[2]).toString();
-    return splitDate.join(' ');
-}
-
-function convertKelvinToFahrenheit(temp: number) {
-    const convTemp = (temp - 273.15) * (9 / 5) + 32;
-    return `${convTemp.toString().split('.')[0]}\xB0F`;
-}
-
-function convertMMtoInch(mm: number) {
-    if (mm === undefined) {
-        return 0;
-    } else {
-        const conversion = (mm / 25.4).toFixed(2);
-        if (mm > 0 && parseFloat(conversion) < 0.5) {
-            return '< 0.5'
-        } else {
-            return conversion;
-        }
-    }
 }
 
 export default Weather;
