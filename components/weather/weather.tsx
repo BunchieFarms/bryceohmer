@@ -12,9 +12,6 @@ function Weather(props: any) {
     const [currentWeather, setCurrentWeather] = useState(props.currentWeather[0]);
     const [forecast, setForecast] = useState(props.weatherForecast[0]);
     const [pastWeather, setPastWeather] = useState(props.pastWeather);
-
-    if (!props.currentWeather[0])
-        return <p>loading weather...</p>;
     
     useEffect(() => {
         const filteredCurrentWeather = props.currentWeather.find((item: any) => item.zip === parseInt(selectedLocation))
@@ -24,6 +21,9 @@ function Weather(props: any) {
         setForecast(filteredForecast);
         setPastWeather(filteredPastWeather)
     }, [selectedLocation])
+
+    if (!props.currentWeather[0])
+        return <p>loading weather...</p>;
 
     return (
         <Box mt={2}>
@@ -40,8 +40,8 @@ function Weather(props: any) {
                                 value={selectedLocation}
                                 onChange={e => setSelectedLocation(e.target.value)}
                             >
-                                {props.locations.map((location: any) => (
-                                    <MenuItem value={location.zip}>{location.city}</MenuItem>
+                                {props.locations.map((location: any, index: number) => (
+                                    <MenuItem key={index} value={location.zip}>{location.city}</MenuItem>
                                 ))}
                             </Select>
                             <Typography>
