@@ -11,8 +11,7 @@ export default function Header() {
         <Box sx={{ flexGrow: 1 }}>
             <Toolbar
                 className={styles.toolbar}
-                sx={{ marginTop: "25%" }}
-                // sx={{ borderBottom: 1, borderColor: 'divider' }}
+                sx={{ borderBottom: 1, borderColor: 'divider' }}
             >
                 <div className={styles.half}>
                     <Face></Face>
@@ -27,32 +26,18 @@ export default function Header() {
                     </Typography>
                 </div>
             </Toolbar>
-            {/* <Toolbar
+            <Toolbar
                 component="nav"
                 variant="dense"
-                sx={{ justifyContent: 'space-between', overflowX: 'auto' }}
+                sx={{ justifyContent: 'space-evenly', overflowX: 'auto' }}
             >
-                <Link
-                    color="inherit"
-                    noWrap
-                    key="1"
-                    variant="body2"
-                    href="/"
-                    sx={{ p: 1, flexShrink: 0 }}
-                >
-                    posts
-                </Link>
-                <Link
-                    color="inherit"
-                    noWrap
-                    key="2"
-                    variant="body2"
-                    href="/"
-                    sx={{ p: 1, flexShrink: 0 }}
-                >
-                    me
-                </Link>
-                <Link
+                <a href="https://github.com/BunchieFarms">
+                    github
+                </a>
+                <a href="https://www.linkedin.com/in/bryceohmer/">
+                    linkedin
+                </a>
+                {/* <Link
                     color="inherit"
                     noWrap
                     key="3"
@@ -61,8 +46,8 @@ export default function Header() {
                     sx={{ p: 1, flexShrink: 0 }}
                 >
                     work
-                </Link>
-            </Toolbar> */}
+                </Link> */}
+            </Toolbar>
         </Box>
     );
 }
