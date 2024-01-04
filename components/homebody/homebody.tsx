@@ -18,7 +18,7 @@ export default function Homebody(props: any) {
                         <Typography sx={{ fontSize: 20 }} gutterBottom>
                             Here's what I have so far. Everything is a work in progress.
                         </Typography> */}
-                        <a style={{fontSize: 20}} href="http://th.bryceohmer.com">Targeted Homes. Where's the closest Target?</a>
+                        <a style={{fontSize: 20}} target="_blank" rel='noreferrer' href="http://th.bryceohmer.com">Targeted Homes. Where&apos;s the closest Target? &#x28;In North Carolina&#x29;</a>
                     </Grid>
                 </Grid>
             </Box>

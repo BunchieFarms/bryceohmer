@@ -31,10 +31,10 @@ export default function Header() {
                 variant="dense"
                 sx={{ justifyContent: 'space-evenly', overflowX: 'auto' }}
             >
-                <a href="https://github.com/BunchieFarms">
+                <a target="_blank" rel='noreferrer' href="https://github.com/BunchieFarms">
                     github
                 </a>
-                <a href="https://www.linkedin.com/in/bryceohmer/">
+                <a target="_blank" rel='noreferrer' href="https://www.linkedin.com/in/bryceohmer/">
                     linkedin
                 </a>
                 {/* <Link
