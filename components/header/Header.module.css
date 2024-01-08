@@ -6,3 +6,10 @@
     margin: 0px auto;
     text-align: center;
 }
+
+.gh_link {
+    height: 2rem;
+}
+.li_link {
+    height: 1.5rem;
+}

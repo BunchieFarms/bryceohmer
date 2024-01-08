@@ -4,14 +4,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import styles from './Header.module.css';
 import Face from '../face/face';
-import { Link } from '@mui/material';
 
 export default function Header() {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Toolbar
                 className={styles.toolbar}
-                sx={{ borderBottom: 1, borderColor: 'divider' }}
             >
                 <div className={styles.half}>
                     <Face></Face>
@@ -29,24 +27,22 @@ export default function Header() {
             <Toolbar
                 component="nav"
                 variant="dense"
-                sx={{ justifyContent: 'space-evenly', overflowX: 'auto' }}
+                sx={{ justifyContent: 'space-evenly', overflowX: 'auto', borderBottom: 1, borderColor: 'divider' }}
             >
                 <a target="_blank" rel='noreferrer' href="https://github.com/BunchieFarms">
-                    github
+                    <img
+                    src={require('../../public/GitHub_Logo.png')}
+                    alt="GitHub Link"
+                    aria-label='GitHub Link'
+                    className={styles.gh_link} />
                 </a>
                 <a target="_blank" rel='noreferrer' href="https://www.linkedin.com/in/bryceohmer/">
-                    linkedin
+                    <img
+                        src={require('../../public/LI-Logo.png')}
+                        alt="LinkedIn Link"
+                        aria-label='LinkedIn Link'
+                        className={styles.li_link} />
                 </a>
-                {/* <Link
-                    color="inherit"
-                    noWrap
-                    key="3"
-                    variant="body2"
-                    href="/"
-                    sx={{ p: 1, flexShrink: 0 }}
-                >
-                    work
-                </Link> */}
             </Toolbar>
         </Box>
     );
