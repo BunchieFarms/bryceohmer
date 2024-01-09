@@ -62,7 +62,7 @@ export default function Projects() {
                             Make a circle &plusmn;0.5 lat/lon around the starting point, and check if there are any Targets in this circle. Try that a few times, adding 1 degree lat/lon each time.
                         </Typography>
                         <Typography paragraph>
-                            We'll probably get a few Targets in that circle, so get the one with the shortest driving duration, and send the encoded polyline, along with other route and address information back to client.
+                            We&apos;ll probably get a few Targets in that circle, so get the one with the shortest driving duration, and send the encoded polyline, along with other route and address information back to client.
                         </Typography>
                         <Typography paragraph>
                             The client then draws the route on the map, showing the user the closest Target, the distance, and driving duration to it.
@@ -115,7 +115,7 @@ export default function Projects() {
                             I wanted to learn React and Next.JS, so I used React and Next.JS to create this static webpage.
                         </Typography>
                         <Typography paragraph>
-                            Running 'npm run build' will create a static site, then I just transfer it to my VPS.
+                            Running &apos;npm run build&apos; will create a static site, then I just transfer it to my VPS.
                         </Typography>
                         <Typography variant="h6">With what?</Typography>
                         <Typography paragraph>

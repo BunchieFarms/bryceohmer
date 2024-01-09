@@ -12,7 +12,7 @@ export default function Work() {
             <Typography paragraph>
                 I have worked on various projects in my time here so far, all within the public safety domain.
                 One of the reasons I took this job was to learn how software development works in a more corporate context.
-                Fortunately, I was able to join a team that enforces <b>Agile</b> principles, and I'm just going to come out and say it, it's not half bad.
+                Fortunately, I was able to join a team that enforces <b>Agile</b> principles, and I&apos;m just going to come out and say it, it&apos;s not half bad.
                 I really appreciate the organization of Agile and I like the feeling of autonomy when choosing the things I work on.
                 It is also nice to be a part of planning the work to be done, and using shorter sprints gives some weird sort of personal incentive to get things done in a short time frame.
             </Typography>
@@ -20,12 +20,12 @@ export default function Work() {
             <Typography paragraph>
                 I have been given the opportunity to grow my skills with technologies that I am interested in.
                 Another reason I started here was to get more exposure to <b>C#</b> and <b>.Net</b> and how they are used in large enterprise applications.
-                I also gained exposure to legacy application maintenance, and was given responsibility over projects using technologies I previously hadn't even heard of.
+                I also gained exposure to legacy application maintenance, and was given responsibility over projects using technologies I previously hadn&apos;t even heard of.
                 This forced me to learn many different things and gain proficiency in many skills.
             </Typography>
             <Typography paragraph>
                 Here, I mostly work with <b>C# with .Net, SQL Server,</b> with some front-end work with <b>Javascript</b>. I do miss full-stack web development, so I stay limber in my free time.
-                Sometimes, I work with legacy projects, using anything from <b>C++</b> to <b>Macro Express</b>. Have you ever heard of Macro Express? It's very useful.
+                Sometimes, I work with legacy projects, using anything from <b>C++</b> to <b>Macro Express</b>. Have you ever heard of Macro Express? It&apos;s very useful.
             </Typography>
             <Typography paragraph>
                 <b>My first programming job taught me a ton about software development and really taught me how to learn.
@@ -40,8 +40,8 @@ export default function Work() {
             </Typography>
             <Typography paragraph>
                 This was my first programming job that I got after college. I know better now, but at the time I fully believed I had no business working as a programmer.
-                I didn't do any internships in college, I thought I had "extensive" Ruby on Rails experience (absolutely not lol), and I was working as a fiberglass laminator, making pipes for paper mills (also a great job).
-                Now I know that a junior developer isn't expected to know how to breathe on their own, much less build anything from scratch, but at the time I thought I was going to get fired for not knowing anything.
+                I didn&apos;t do any internships in college, I thought I had &quot;extensive&quot; Ruby on Rails experience (absolutely not lol), and I was working as a fiberglass laminator, making pipes for paper mills (also a great job).
+                Now I know that a junior developer isn&apos;t expected to know how to breathe on their own, much less build anything from scratch, but at the time I thought I was going to get fired for not knowing anything.
             </Typography>
             <Typography paragraph>
                 This job was great and I still miss it a bit. I was given a lot of autonomy and freedom and responsibility and was able to work with a small team of amazing people.
