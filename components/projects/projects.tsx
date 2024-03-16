@@ -37,7 +37,7 @@ export default function Projects() {
                                 {
                                     project.links.map((link, j) => (
                                         <Grid item xs={(12 / (project.links.length + 1))} key={j}>
-                                            <Button size='large' target="_blank" rel='noreferrer' href={link.url}>{link.label}</Button>
+                                            <Button size='large' target="_blank" href={link.url}>{link.label}</Button>
                                         </Grid>
                                     ))
                                 }

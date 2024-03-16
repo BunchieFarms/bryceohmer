@@ -36,7 +36,7 @@
                 {
                     "sectionHeader": "How?",
                     "text": [
-                        "Anyway, this app is simple, and it was my first time using Blazor.",
+                        "Anyway, this app is simple, and it was my first time using Blazor. I originally wrote it all as a Blazor Server app but rewrote it to use Blazor WASM and a .Net Web API.",
                         "When you search for a location, the app makes a request to the Google Maps Geocoding API in order to get the Latitude and Longitude. I then query my database, which is populated by my data processor, to get a group of nearby stations. I then do a little calculation to get the nearest station.",
                         "A lot of times, unfortunately, yesterday's weather data hasn't been posted by the station. In this case, I do the next best thing, and get whatever missing past day's forecast, which should be a decent approximate until the data comes in.",
                         "The result is the past 6 days of weather data, and I mark which ones are predictions and which are actuals."
@@ -45,7 +45,7 @@
                 {
                     "sectionHeader": "With What?",
                     "text": [
-                        "Blazor Server",
+                        "Blazor WASM, .Net 8 Web API",
                         "Google Maps API (Geocoding, Time Zone), Pirate Weather API, NOAA GSOD Dataset"
                     ]
                 }
@@ -81,7 +81,7 @@
                 {
                     "sectionHeader": "With What?",
                     "text": [
-                        ".Net 7.0, SharpZipLib, HtmlAgilityPack, TinyCsvParser, PostgresQL"
+                        ".Net 8.0, SharpZipLib, HtmlAgilityPack, TinyCsvParser, MongoDB"
                     ]
                 }
             ]
